@@ -43,7 +43,4 @@ for i in text:
 if s.size() > 0:
     error = 3
 
-if error == 0:
-    print('Parentheses : Matched ! ! !')
-else:
-    print('Parentheses : Unmatched ! ! !')
+print('Parentheses : Matched ! ! !') if error == 0  else print('Parentheses : Unmatched ! ! !')
