@@ -4,10 +4,12 @@ class Queue:
     def isEmpty(self):
         return self.list == []
     def enQueue(self,item):
-        index = -1
-        for i in self.list:
+        for i in self.list[-1::-1]:
             if i[0] == item[0]:
-                pass
+                if self.list.index(i) == self.Size() -1:
+                    break
+                self.insert(self.list.index(i)+1,item)
+                return
         self.list.append(item)
     def deQueue(self):
         return self.list.pop(0) if not self.isEmpty() else 'Empty'
@@ -17,12 +19,19 @@ class Queue:
         self.list.insert(index,item)
         
 lsInput = input('Enter Input : ').split('/')
-lsData = lsInput[0].split(',')
-lsWork = lsInput[1].split(',')
-q = Queue()
-for i in lsWork:
+
+Dict = dict()
+for i in lsInput[0].split(','):
     i = i.split()
-    if i[0] == 'E':
-        q.enQueue(i[1])
-    elif i[0] == 'D':
-        print(q.deQueue())
+    Dict[i[1]] = Dict.get(i[1],i[0])
+
+q = Queue()
+for i in lsInput[1].split(','):
+    i = i.split()
+    if len(i) == 1:
+        pop = q.deQueue()
+        print(pop if pop == 'Empty' else int(pop[1]))
+    else:
+        i[0] = Dict[i[1]]
+        q.enQueue(i)
+        

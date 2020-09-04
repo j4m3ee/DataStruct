@@ -13,26 +13,19 @@ class Queue:
         return len(self.list)
 
 def String(ls):
-    s = ''
-    for i in ls:
-        if ls.index(i) != 0 and ls.index(i) != len(ls):
-            s += ', '
-        s += str(i)
-    return s
+    return ', '.join(str(data) for data in ls) 
     
 ls = input('Enter Input : ').split(',')
 q = Queue()
-trash = []
+dq = Queue()
 for i in ls:
     i = i.split()
-    if i[0] == 'E':
-        q.enQueue(i[1])
-        print(q)
-    elif i[0] == 'D':
-        if not q.isEmpty():
-            trash.append(q.deQueue())
-            print(trash[-1],'<-',q)
-        elif q.isEmpty():
-            print(q.deQueue())
-if len(trash) != 0:
-    print(String(trash),':',q)
+    if i[0] == 'D':
+        deQ = q.deQueue()
+        if deQ != 'Empty':
+            dq.enQueue(deQ)
+            print(deQ,'<- ',end = '')
+    else:
+        q.enQueue(int(i[1]))
+    print(q)
+print(dq,':',q)

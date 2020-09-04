@@ -12,4 +12,11 @@ class Queue:
     def insert(self,index,item):
         self.list.insert(index,item)
 
-Input = input('Enter Input (Red, Blue) : ').split()
+def main():
+    red,blue = input('Enter Input (Red, Blue) : ').split()
+    red = list(red)
+    blue = list(blue)
+    print(red,blue)
+
+if __name__ == "__main__":
+    main()
