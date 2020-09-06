@@ -15,6 +15,5 @@ lsa.append(ls.copy())
 print(lsa)'''
 #lst = [int(a) for a in input('input : ').split(",")]
 #print(lst)
-n1 = number(int(input('Enter number : ')))
-n2 = number(int(input('Enter number : ')))
-print((n1.__add__(n2)).num)
+
+print(5 == 6 == 5)

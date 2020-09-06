@@ -17,6 +17,7 @@ class Queue:
         return len(self.list)
     def insert(self,index,item):
         self.list.insert(index,item)
+    
         
 lsInput = input('Enter Input : ').split('/')
 
@@ -34,4 +35,6 @@ for i in lsInput[1].split(','):
     else:
         i[0] = Dict[i[1]]
         q.enQueue(i)
+
+#credit : https://github.com/radsadorn
         
