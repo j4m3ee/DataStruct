@@ -86,15 +86,3 @@ class linked_list:
 
         
                 
-my_link = linked_list()
-my_link.append(12)
-my_link.append(2)
-my_link.appendHead(23)
-my_link.append(24)
-my_link.appendHead(6)
-my_link.append(234)
-print(my_link.display())
-print(my_link.pop())
-print(my_link.display())
-print(my_link.popHead())
-print(my_link.display())
