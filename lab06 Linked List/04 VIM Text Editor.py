@@ -19,7 +19,7 @@ class node():
         self.next = None
         self.prev = None
 
-class doublyLinkedList():
+class LinkedList():
     def __init__(self):
         self.head = node()
 
@@ -84,7 +84,6 @@ class doublyLinkedList():
 
     def erase(self,index):
         if index >= self.lenght():
-            print ("ERROR: 'erase' index out of range!")
             return None
         cur_idx = 0
         cur_node = self.head
@@ -98,7 +97,7 @@ class doublyLinkedList():
 
 def main():
     Input = input('Enter Input : ').split(',')
-    Linked_list = doublyLinkedList()
+    Linked_list = LinkedList()
     cursor = 0
 
     for i in Input:
@@ -112,19 +111,22 @@ def main():
             cursor = cursor + 1 if cursor != Linked_list.lenght()-1 else Linked_list.lenght()-1
         elif i[0] == 'B':
             if cursor != 0 : 
-                Linked_list.erase(cursor)
                 cursor -= 1
+                Linked_list.erase(cursor)
         elif i[0] == 'D':
-            if cursor != Linked_list.lenght()-1:
-                Linked_list.erase(cursor+1)
+            if cursor != Linked_list.lenght():
+                Linked_list.erase(cursor)
     
-    print(Linked_list)
+    cursorStatus = True
     output = ""
-    # for i,data in enumerate(Linked_list.display()):
-    #     output += data + ' '
-    #     if i == cursor-1: 
-    #         output += '| '
-    # print(output)
+    for i,data in enumerate(Linked_list.display()):
+        if i == cursor: 
+            output += '| '
+            cursorStatus = False
+        output += data + ' '
+    if cursorStatus: output += '| '
+            
+    print(output)
             
 if __name__=='__main__':
     main()
