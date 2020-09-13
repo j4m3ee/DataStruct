@@ -47,7 +47,6 @@ class LinkedList():
     
     def insert(self,index,data):
         if index > self.lenght() or index < 0:
-            #print ("Data cannot be added")
             return None
         elif index == 0:
             self.appendHead(data)
@@ -95,38 +94,47 @@ class LinkedList():
                 return
             cur_idx +=1 
 
+    def find(self,data):
+        cur = self.head
+        inx = 0
+        while cur.next != None:
+            cur = cur.next
+            if cur.data == data:
+                return inx
+            inx += 1
+
+    def shiftLeft(self):
+        inx = self.find('|')
+        if inx != 0 :
+            self.erase(inx) 
+            self.insert(inx - 1,'|')
+
+    def shiftRight(self):
+        inx = self.find('|')
+        if inx != self.lenght()-1 :
+            self.erase(inx) 
+            self.insert(inx + 1,'|')
+
 def main():
     Input = input('Enter Input : ').split(',')
     Linked_list = LinkedList()
-    cursor = 0
+    Linked_list.append('|')
 
     for i in Input:
         i = i.strip().split()
         if i[0] == 'I':
-            Linked_list.insert(cursor,i[1])
-            cursor += 1
+            Linked_list.insert(Linked_list.find('|'),i[1])
         elif i[0] == 'L':
-            cursor = cursor - 1 if cursor != 0 else 0
+            Linked_list.shiftLeft()
         elif i[0] == 'R':
-            cursor = cursor + 1 if cursor != Linked_list.lenght()-1 else Linked_list.lenght()-1
+            Linked_list.shiftRight()
         elif i[0] == 'B':
-            if cursor != 0 : 
-                cursor -= 1
-                Linked_list.erase(cursor)
+            inx = Linked_list.find('|')
+            if inx != 0 : Linked_list.erase(inx-1)
         elif i[0] == 'D':
-            if cursor != Linked_list.lenght():
-                Linked_list.erase(cursor)
-    
-    cursorStatus = True
-    output = ""
-    for i,data in enumerate(Linked_list.display()):
-        if i == cursor: 
-            output += '| '
-            cursorStatus = False
-        output += data + ' '
-    if cursorStatus: output += '| '
-            
-    print(output)
+            inx = Linked_list.find('|')
+            if inx != Linked_list.lenght()-1 : Linked_list.erase(inx+1)
+    print(Linked_list)
             
 if __name__=='__main__':
     main()
