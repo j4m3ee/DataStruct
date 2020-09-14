@@ -8,7 +8,6 @@ class node():
     def __init__(self,data = None):
         self.data = data
         self.next = None
-        self.prev = None
 
 class LinkedList():
     def __init__(self):
@@ -23,24 +22,21 @@ class LinkedList():
             self.append(i)
 
     def append(self,data):
-        new_node = node(data)
-        cur = self.head
+        new_node,cur = node(data),self.head
         while cur.next != None:
             cur = cur.next
         new_node.prev = cur
         cur.next = new_node
 
     def display(self):
-        elems = []
-        cur = self.head
+        elems,cur = [],self.head
         while cur.next != None:
             cur = cur.next
             elems.append(cur.data)
         return elems
 
     def lenght(self):
-        cur = self.head
-        total = 0
+        cur,total = self.head,0
         while cur.next != None:
             total += 1
             cur = cur.next
@@ -56,24 +52,21 @@ class LinkedList():
             strList.append(str(i))
         self.addList(strList)
 
-def getDigit(pos,data):
-    inx = pos*-1
+def getDigit(pos,data): #return int from round position
+    pos = pos*-1
     try:
-        digit = data[inx]
+        digit = data[pos]
         return int(digit) if digit != '-' else 0
     except IndexError:
         return 0
 
-def redixSort(List):
-    round = 0
-    useList = List.copy()
+def redixSort(useList):
+    round,nInput = 0,len(useList)
     subList = list(LinkedList() for _ in range(10))
     while True:
         round += 1
-
         for i,data in enumerate(useList):
             num = getDigit(round,data)
-            #print(num)
             for j in range(10):
                 if num == j:
                     subList[j].append(data)
@@ -90,14 +83,13 @@ def redixSort(List):
             print(i,':',' '.join(data.display()))
 
         useList = []
-        for i in subList:
+        for i in subList:                               #update data from round sort
             for j in i.display():
                 useList.append(j)
-        if subList[0].lenght() == len(List): break    
-        subList = list(LinkedList() for _ in range(10))
+        if subList[0].lenght() == nInput: break      #if all data sorted
+        subList = list(LinkedList() for _ in range(10)) #Clear sub list
         
-    result = useList.copy()
-    return round-1,result
+    return round-1,useList
 
 def main():
     Input = input('Enter Input : ').split()

@@ -120,8 +120,7 @@ def main():
             if  Linked_list.insert(int(ins[0]),int(ins[1])) != None:
                 print('index = {} and data = {}'.format(int(ins[0]),int(ins[1])))
             else:
-                print ("Data cannot be added")
-                
+                print ("Data cannot be added")            
         elif i[0] == 'R':
             data = Linked_list.remove(int(i[1]))
             print('removed : {} from index : {}'.format(i[1],data) if data != None else 'Not Found!')
