@@ -17,6 +17,11 @@ class LinkedList():
     def __str__(self):
         return " -> ".join(str(i) for i in self.display())
 
+    def addList(self,data):
+        self.head = node()
+        for i in data:
+            self.append(i)
+
     def append(self,data):
         new_node = node(data)
         cur = self.head
@@ -25,9 +30,6 @@ class LinkedList():
         new_node.prev = cur
         cur.next = new_node
 
-    def isEmpty(self):
-        return self.head.next == None
-
     def display(self):
         elems = []
         cur = self.head
@@ -35,34 +37,6 @@ class LinkedList():
             cur = cur.next
             elems.append(cur.data)
         return elems
-    
-    def insert(self,index,data):
-        if index > self.lenght() or index < 0:
-            return None
-        elif index == 0:
-            self.appendHead(data)
-            return self.display()
-        elif index == self.lenght():
-            self.append(data)
-            return self.display()
-        cur_idx = 1
-        cur_node = self.head
-        new_node = node(data)
-        while True:
-            cur_node = cur_node.next
-            if cur_idx == index : 
-                new_node.next = cur_node.next
-                cur_node.next = new_node
-                return new_node.data
-            cur_idx += 1
-    
-    def appendHead(self,data):
-        new_node = node(data)
-        new_node.next = self.head.next
-        new_head = node()
-        new_head.next = new_node
-        new_node.prev = new_head
-        self.head = new_head
 
     def lenght(self):
         cur = self.head
@@ -71,50 +45,67 @@ class LinkedList():
             total += 1
             cur = cur.next
         return total
-
-    def erase(self,index):
-        if index >= self.lenght():
-            return None
-        cur_idx = 0
-        cur_node = self.head
-        while True:
-            last_node = cur_node
-            cur_node = cur_node.next
-            if cur_idx == index:
-                last_node.next = cur_node.next
-                return
-            cur_idx +=1 
     
-    def isSort(self):
-        val = True
-        cur = self.head
-        while cur.next != None:
-            last_node = cur
-            cur = cur.next
-            if last_node.data > cur.data: val =  False
-        return val
+    def sort(self):
+        cur = self.display()
+        ls,strList = [],[]
+        for i in cur:
+            ls.append(int(i))
+        ls = sorted(ls)
+        for i in ls:
+            strList.append(str(i))
+        self.addList(strList)
 
 def getDigit(pos,data):
-    tool = pow(10,pos-1)
-    num = int(data/tool)
-    return num%10
+    inx = pos*-1
+    try:
+        digit = data[inx]
+        return int(digit) if digit != '-' else 0
+    except IndexError:
+        return 0
+
+def redixSort(List):
+    round = 0
+    useList = List.copy()
+    subList = list(LinkedList() for _ in range(10))
+    while True:
+        round += 1
+
+        for i,data in enumerate(useList):
+            num = getDigit(round,data)
+            #print(num)
+            for j in range(10):
+                if num == j:
+                    subList[j].append(data)
+                    break
+
+        #sub-sorted
+        for i in range(10):
+            subList[i].sort()
+            
+        print('------------------------------------------------------------')
+        print('Round :',round)
+
+        for i,data in enumerate(subList):
+            print(i,':',' '.join(data.display()))
+
+        useList = []
+        for i in subList:
+            for j in i.display():
+                useList.append(j)
+        if subList[0].lenght() == len(List): break    
+        subList = list(LinkedList() for _ in range(10))
+        
+    result = useList.copy()
+    return round-1,result
 
 def main():
     Input = input('Enter Input : ').split()
-    List = LinkedList()
-    
+    round,result = redixSort(Input)
     print('------------------------------------------------------------')
-    print('Round : ')
-
-    print('0',':')
-        
-    print('------------------------------------------------------------')
-    
-    print('0',' Time(s)')
+    print(round,'Time(s)')
     print('Before Radix Sort :',' -> '.join(Input))
-    print('After  Radix Sort :',List)
-    print(max(Input))
+    print('After  Radix Sort :',' -> '.join(result))
     
-
 if __name__=='__main__':
     main()

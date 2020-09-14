@@ -15,5 +15,8 @@ lsa.append(ls.copy())
 print(lsa)'''
 #lst = [int(a) for a in input('input : ').split(",")]
 #print(lst)
-
-print(5 == 6 == 5)
+text = '3240'
+try:
+    print(text[-2])
+except IndexError:
+    print('0')
