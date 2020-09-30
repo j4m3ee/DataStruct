@@ -19,16 +19,14 @@ class linked_list:
         return self.head.next == self.tail
 
     def append(self,data):
-        # new_node = node(data , self.tail , self.tail.prev)
-        # self.tail.prev.next = new_node
-        cur = self.head
-        while cur.next != self.tail:
-            cur = cur.next
-        new_node = node(data,self.tail,cur)
-        cur.next = new_node
+        new_node = node(data , self.tail , self.tail.prev)
+        self.tail.prev.next = new_node
+        self.tail.prev = new_node
+        return new_node.data
 
     def appendHead(self,data):
         new_node = node(data , self.head.next , self.head)
+        self.head.next.prev = new_node
         self.head.next = new_node
         return new_node.data
 
@@ -133,32 +131,24 @@ test.append(34)
 test.append(39)
 test.append(3)
 print(test)
-# test.remove(3)
-# print(test)
-# print("Size",test.lenght())
-# print("Pop Head",test.popHead())
-# print(test)
-# print("Pop",test.pop())
-# print(test)
-# print("Insert",test.insert(1,99))
-# print(test)
-# print("Remove",test.remove(99))
-# print(test)
-# print("Erase",test.erase(2))
-# print(test)
-# print("Peek",test.peek())
-# print(test)
-# print("Append head",test.appendHead(69))
-# print(test)
-test1 = linked_list()
-test1.append(23)
-test1.append(13)
-test1.append(56)
-test1.append(34)
-test1.append(39)
-test1.append(3)
-print(test1)
-print(test.compare(test1))
+test.remove(3)
+print(test)
+print("Size",test.lenght())
+print("Pop Head",test.popHead())
+print(test)
+print("Pop",test.pop())
+print(test)
+print("Insert",test.insert(1,99))
+print(test)
+print("Remove",test.remove(99))
+print(test)
+print("Erase",test.erase(2))
+print(test)
+print("Peek",test.peek())
+print(test)
+print("Append head",test.appendHead(69))
+print(test)
+
 
 
         
