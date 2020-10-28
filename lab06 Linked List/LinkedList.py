@@ -74,14 +74,11 @@ class linked_list:
         return self.tail.prev.data
 
     def pop(self):
-        cur = self.head
-        while True:
-            last_node = cur
-            cur = cur.next
-            if cur.next == self.tail:
-                last_node.next = self.tail
-                self.tail.prev = last_node
-                return cur.data
+        if self.isEmpty(): return 'Empty'
+        data = self.tail.prev.data
+        self.tail.prev.prev.next = self.tail
+        self.tail.prev = self.tail.prev.prev
+        return data
 
     def popHead(self):
         cur = self.head

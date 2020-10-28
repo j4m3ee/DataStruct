@@ -59,7 +59,6 @@ class doublyLinkedList():
     
     def insert(self,index,data):
         if index > self.lenght() or index < 0:
-            #print ("Data cannot be added")
             return None
         elif index == 0:
             self.appendHead(data)
