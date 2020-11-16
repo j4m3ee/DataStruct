@@ -18,6 +18,7 @@ print("sum :",summation(n))
 
 print("fib :",fibonacci(n))
 
+fib=[]
 for i in range(1,n+1):
-    print(fibonacci(i),end=" ")
-print()
+    fib.append(fibonacci(i))
+print(' '.join(str(i) for i in fib))

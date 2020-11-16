@@ -60,9 +60,9 @@ class BST:
         while not q.isEmpty():
             n = q.deQ()
             ls.append(n.data)
-            if n.left is not None:
+            if n.left:
                 q.enQ(n.left)
-            if n.right is not None:
+            if n.right:
                 q.enQ(n.right)
         return ls
 
@@ -73,6 +73,15 @@ class BST:
             self.inOrder(root.left)
             print(root.data,end = ' ')
             self.inOrder(root.right)
+
+    def inOrderL(self,root):
+        return (self.inOrderL(root.left) + [root.data] + self.inOrderL(root.right)) if root else []
+    
+    def postOrderL(self,root):
+        return (self.postOrderL(root.left) + self.postOrderL(root.right) + [root.data]) if root else []
+
+    def preOrderL(self,root):
+        return ([root.data] + self.preOrderL(root.left) + self.preOrderL(root.right)) if root else []
         
     def postOrder(self,root):
         if root != None:
@@ -92,6 +101,7 @@ inp = [int(i) for i in input('Enter Input : ').split()]
 for i in inp:
     root = T.insert(i)
 
+T.printTree(T.root)
 print('Preorder :',end = ' ')
 T.preOrder(root)
 print()
@@ -102,4 +112,8 @@ print('Postorder :',end = ' ')
 T.postOrder(root)
 print()
 print('Breadth :',' '.join(str(i) for i in T.breadthFirst()))
+
+print(T.preOrderL(T.root))
+print(T.inOrderL(T.root))
+print(T.postOrderL(T.root))
 

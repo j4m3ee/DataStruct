@@ -44,8 +44,7 @@ class BST:
         if node.data == None:
             return node
         while True:
-            if node.left == None:
-                return node.data
+            if node.left == None: return node.data
             node = node.left
 
     def max(self):
@@ -53,8 +52,7 @@ class BST:
         if node.data == None:
             return node
         while True:
-            if node.right == None:
-                return node.data
+            if node.right == None: return node.data 
             node = node.right
 
 T = BST()
